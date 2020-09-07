@@ -24,6 +24,7 @@ set tags=~/.vim/ctags
 hi StatusLine ctermbg=white ctermfg=darkblue
 hi StatusLineNC ctermbg=white ctermfg=black
 
+au! BufRead,BufNewFile *.hidden setfiletype markdown
 
 autocmd BufNewFile,BufRead *.py set tabstop=4
 autocmd BufNewFile,BufRead *.py set shiftwidth=4
@@ -166,4 +167,4 @@ endfunction
 ":noremap S :execute('tselect '.expand('<cword>')) <cr>
 
 
-
+:set noincsearch
