@@ -3,6 +3,75 @@
 highlight ColorColumn ctermbg=4
 set colorcolumn=81,121
 
+" Cursor line
+set cursorline
+"hi CursorLine cterm=bold ctermbg=1 ctermfg=NONE
+hi CursorLine cterm=bold
+
+"syntax match todoPending /^\s*\[.*$/
+"highlight link todoPending Error
+ 
+" custom colors for *.hidden
+autocmd BufNewFile,BufRead *.hidden call TODOSyntax()
+function TODOSyntax()
+
+   " Todo task (priority)
+   hi PrioritySymbol NONE
+   hi Priority  cterm=NONE ctermfg=1 ctermbg=NONE
+   syn match PrioritySymbol contained "\[!\]"
+   syn match Priority "\\\@<!\[!\][^"*]\+$" contains=PrioritySymbol 
+
+   " Todo task (done)
+   hi DoneSymbol NONE
+   hi Done  cterm=NONE ctermfg=0 ctermbg=NONE
+   syn match Done "\\\@<!\[x\][^"*]\+$" contains=DoneSymbol 
+
+   " Todo task (partial)
+   hi PartialSymbol NONE
+   hi Partial  cterm=NONE ctermfg=3 ctermbg=NONE
+   syn match PartialSymbol contained "\[-\]"
+   syn match Partial "\\\@<!\[-\][^"*]\+$" contains=PartialSymbol 
+
+
+   set concealcursor=n                       
+   set conceallevel=3                            
+
+   " <R>STRING<R> : Bold/Red
+   hi RedSymbol NONE
+   hi Red  cterm=bold ctermfg=1
+   syn match RedSymbol contained "<R>" conceal                                      
+   syn match Red "\\\@<!<R>[^"*|]\+<R>" contains=RedSymbol 
+
+   " <G>STRING<G> : Bold/Green
+   hi GreenSymbol NONE
+   hi Green  cterm=bold ctermfg=2
+   syn match GreenSymbol contained "<G>" conceal                                      
+   syn match Green "\\\@<!<G>[^"*|]\+<G>" contains=GreenSymbol 
+
+   " <Y>STRING<Y> : Bold/Yellow
+   hi YellowSymbol NONE
+   hi Yellow  cterm=bold ctermfg=3
+   syn match YellowSymbol contained "<Y>" conceal                                      
+   syn match Yellow "\\\@<!<Y>[^"*|]\+<Y>" contains=YellowSymbol 
+
+   " <B>STRING<B> : Bold/Blue
+   hi BlueSymbol NONE
+   hi Blue  cterm=bold ctermfg=6
+   syn match BlueSymbol contained "<B>" conceal                                      
+   syn match Blue "\\\@<!<B>[^"*]\+<B>" contains=BlueSymbol 
+
+   " Todo task
+   hi TodoSymbol NONE
+   hi Todo  cterm=NONE ctermfg=2 ctermbg=NONE
+   syn match TodoSymbol contained "\[\s\]"
+   syn match Todo "\\\@<!\[\s\][^"*]\+$" contains=TodoSymbol 
+
+
+
+
+
+
+endfunction
 
 
 " Edition
@@ -24,7 +93,7 @@ set tags=~/.vim/ctags
 hi StatusLine ctermbg=white ctermfg=darkblue
 hi StatusLineNC ctermbg=white ctermfg=black
 
-au! BufRead,BufNewFile *.hidden setfiletype markdown
+" au! BufRead,BufNewFile *.hidden setfiletype markdown
 
 autocmd BufNewFile,BufRead *.py set tabstop=4
 autocmd BufNewFile,BufRead *.py set shiftwidth=4
