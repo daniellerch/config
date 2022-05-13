@@ -1,4 +1,7 @@
 
+set modeline
+set encoding=utf-8
+
 " 80C Line
 highlight ColorColumn ctermbg=4
 set colorcolumn=81,121
