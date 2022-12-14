@@ -1,0 +1,5 @@
+# List keys with: infocmp -L -1
+"\e[A": history-search-backward  # arrow up
+"\e[B": history-search-forward   # arrow down
+"\C[D": beginning-of-line        # ctrl + arrow left
+"\C[C": end-of-line              # ctrl + arrow right
